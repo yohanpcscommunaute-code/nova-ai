@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080b16">
+  <meta name="description" content="NOVA AI : votre espace intelligent pour apprendre, créer et développer.">
+  <title>NOVA AI — Créez sans limites</title>
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #080b16;
+      --panel: #111629;
+      --border: #252d45;
+      --text: #f5f7ff;
+      --muted: #9ba6c3;
+      --blue: #6485ff;
+      --purple: #a47bff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+    }
+    button, textarea, select { font: inherit; }
+    button { cursor: pointer; }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 18px 6%;
+      border-bottom: 1px solid var(--border);
+      background: #0b0f1d;
+    }
+    .brand { font-size: 22px; font-weight: 800; letter-spacing: 1px; }
+    .brand span { color: var(--blue); }
+    .tag {
+      color: #c9d1ff;
+      border: 1px solid #343d63;
+      padding: 7px 11px;
+      border-radius: 20px;
+      font-size: 12px;
+    }
+    main { width: min(1050px, 90%); margin: auto; }
+    .hero { text-align: center; padding: 66px 0 36px; }
+    .eyebrow { color: #a99aff; font-size: 13px; font-weight: 700; }
+    h1 { font-size: clamp(34px, 7vw, 62px); line-height: 1.1; margin: 18px 0; }
+    h1 span {
+      background: linear-gradient(90deg, #7195ff, #c19aff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .hero p { max-width: 620px; margin: auto; color: var(--muted); line-height: 1.8; }
+    .tabs { display: flex; justify-content: center; gap: 10px; margin: 30px 0; flex-wrap: wrap; }
+    .tab, .level, .secondary {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      color: var(--text);
+      padding: 11px 16px;
+      border-radius: 12px;
+    }
+    .tab.active, .primary {
+      background: linear-gradient(100deg, #557aff, #8b65f5);
+      color: white;
+      border: 0;
+    }
+    .workspace {
+      border: 1px solid var(--border);
+      background: linear-gradient(145deg, #12182b, #0d1120);
+      border-radius: 20px;
+      padding: 22px;
+      margin-bottom: 28px;
+    }
+    .workspace h2 { margin-top: 0; font-size: 20px; }
+    .levels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin: 18px 0; }
+    .level { text-align: left; }
+    .level strong, .level small { display: block; }
+    .level small { color: var(--muted); margin-top: 6px; line-height: 1.5; }
+    .level.active { border-color: var(--blue); background: #1a2444; }
+    textarea, select {
+      width: 100%;
+      color: var(--text);
+      background: #090d19;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      outline: none;
+    }
+    textarea { min-height: 125px; resize: vertical; }
+    textarea:focus, select:focus { border-color: var(--blue); }
+    .actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
+    .primary, .secondary { padding: 12px 18px; border-radius: 11px; }
+    .status { color: var(--muted); font-size: 13px; margin-top: 14px; line-height: 1.6; }
+    .preview {
+      min-height: 140px;
+      border: 1px dashed #394362;
+      border-radius: 12px;
+      padding: 16px;
+      margin-top: 12px;
+      background: #090d19;
+      overflow-wrap: anywhere;
+    }
+    .preview iframe { width: 100%; height: 350px; border: 0; border-radius: 8px; background: white; }
+    .features { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 28px 0 50px; }
+    .feature { padding: 18px; border: 1px solid var(--border); border-radius: 15px; background: var(--panel); }
+    .feature h3 { font-size: 16px; }
+    .feature p { color: var(--muted); line-height: 1.7; font-size: 14px; }
+    footer { text-align: center; padding: 25px; border-top: 1px solid var(--border); color: var(--muted); font-size: 13px; }
+    @media (max-width: 650px) {
+      header { padding: 15px 5%; }
+      .hero { padding-top: 45px; }
+      .levels, .features { grid-template-columns: 1fr; }
+      .workspace { padding: 16px; }
+      .tag { font-size: 10px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="brand">NOVA <span>AI</span></div>
+    <div class="tag">ESPACE CRÉATIF IA</div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="eyebrow">VOTRE IDÉE. VOTRE PROJET. VOTRE NOVA.</div>
+      <h1>Imaginez. Créez.<br><span>Donnez vie à vos idées.</span></h1>
+      <p>Un espace pour apprendre, écrire, programmer et préparer vos futurs sites web grâce à l'intelligence artificielle.</p>
+    </section>
+
+    <nav class="tabs" aria-label="Espaces de travail">
+      <button class="tab active" data-view="chat">Assistant IA</button>
+      <button class="tab" data-view="builder">Créateur de sites</button>
+    </nav>
+
+    <section class="workspace">
+      <div id="chatView">
+        <h2>✦ Assistant NOVA</h2>
+        <p class="status">Posez une question, demandez une explication ou préparez du code.</p>
+        <div class="levels" role="group" aria-label="Niveau de capacité">
+          <button class="level active" data-level="Moyen"><strong>Moyen</strong><small>Questions, rédaction et petits projets.</small></button>
+          <button class="level" data-level="Normal"><strong>Normal</strong><small>Projets multipages et code plus avancé.</small></button>
+          <button class="level" data-level="Pro"><strong>Pro</strong><small>Préparation d'applications complexes.</small></button>
+        </div>
+        <textarea id="chatInput" placeholder="Écrivez votre question ici..."></textarea>
+        <div class="actions"><button class="primary" id="chatSend">Envoyer</button><button class="secondary" id="chatClear">Effacer</button></div>
+        <div id="chatResult" class="preview" aria-live="polite">Votre conversation apparaîtra ici. Le moteur d'IA n'est pas encore connecté.</div>
+      </div>
+
+      <div id="builderView" hidden>
+        <h2>⌘ Créateur de sites web</h2>
+        <p class="status">Décrivez le site que vous souhaitez préparer.</p>
+        <textarea id="siteInput" placeholder="Exemple : crée une page d'accueil moderne pour une boutique de vêtements..."></textarea>
+        <div class="actions"><button class="primary" id="siteGenerate">Préparer un aperçu de démonstration</button></div>
+        <div id="siteStatus" class="status">Cette démonstration ne génère pas encore automatiquement un site complet.</div>
+        <div id="sitePreview" class="preview">L'aperçu apparaîtra ici.</div>
+      </div>
+    </section>
+
+    <section class="features">
+      <article class="feature"><h3>✦ Assistant conversationnel</h3><p>Une interface destinée aux questions, aux cours, à la rédaction et à la programmation.</p></article>
+      <article class="feature"><h3>⌘ Création web</h3><p>Un espace de travail conçu pour accueillir la génération de sites et leur prévisualisation.</p></article>
+      <article class="feature"><h3>◈ Trois niveaux</h3><p>Moyen, Normal et Pro : les capacités réelles seront configurées lorsque le backend sera connecté.</p></article>
+    </section>
+  </main>
+
+  <footer>© 2026 NOVA AI · Première version de démonstration</footer>
+
+  <script>
+    const tabs = document.querySelectorAll('.tab');
+    const chatView = document.getElementById('chatView');
+    const builderView = document.getElementById('builderView');
+
+    tabs.forEach(tab => tab.addEventListener('click', () => {
+      tabs.forEach(item => item.classList.toggle('active', item === tab));
+      const builder = tab.dataset.view === 'builder';
+      chatView.hidden = builder;
+      builderView.hidden = !builder;
+    }));
+
+    document.querySelectorAll('.level').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.level').forEach(item => item.classList.toggle('active', item === button));
+      });
+    });
+
+    document.getElementById('chatSend').addEventListener('click', () => {
+      const question = document.getElementById('chatInput').value.trim();
+      const result = document.getElementById('chatResult');
+      if (!question) {
+        result.textContent = 'Écrivez une question avant de l’envoyer.';
+        return;
+      }
+      result.textContent = 'Votre demande a été saisie : « ' + question + ' ». Le moteur d’IA n’est pas encore connecté. Cette version ne produit pas encore de réponse générée par une IA.';
+    });
+
+    document.getElementById('chatClear').addEventListener('click', () => {
+      document.getElementById('chatInput').value = '';
+      document.getElementById('chatResult').textContent = 'Votre conversation apparaîtra ici. Le moteur d’IA n’est pas encore connecté.';
+    });
+
+    document.getElementById('siteGenerate').addEventListener('click', () => {
+      const description = document.getElementById('siteInput').value.trim();
+      const preview = document.getElementById('sitePreview');
+      const status = document.getElementById('siteStatus');
+      if (!description) {
+        status.textContent = 'Décrivez le site que vous souhaitez préparer.';
+        return;
+      }
+      const safeDescription = description.replace(/[&<>"']/g, character => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+      })[character]);
+      const documentContent = '<!DOCTYPE html><html lang="fr"><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><body style="font-family:Arial,sans-serif;padding:32px;color:#18213b"><h1>Votre projet web</h1><p>' + safeDescription + '</p><p>Maquette de démonstration NOVA AI</p></body></html>';
+      preview.replaceChildren();
+      const frame = document.createElement('iframe');
+      frame.title = 'Aperçu de démonstration du site';
+      frame.setAttribute('sandbox', '');
+      frame.srcdoc = documentContent;
+      preview.appendChild(frame);
+      status.textContent = 'Aperçu de démonstration créé localement. Il ne s’agit pas encore d’un site complet généré par une IA.';
+    });
+  </script>
+</body>
+  </html>
