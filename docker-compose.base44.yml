@@ -1,0 +1,50 @@
+services:
+  app:
+    image: node:22
+    working_dir: /app
+    volumes:
+      - .:/app
+    ports:
+      - "3000:3000"
+    environment:
+      - BASE44_PREVIEW_MODE
+      - BASE44_PUBLIC_HOST_SUFFIX
+      - BASE44_SANDBOX_HOST_DOMAIN
+    env_file:
+      - /run/base44/app.env
+    command:
+      - sh
+      - -ec
+      - |
+        # Copy source to a non-bind-mounted dir to avoid wrangler's file-watcher
+        # picking up Docker bind-mount inotify storms (which cause infinite reloads).
+        # Use a separate "public" assets dir so the assets watcher doesn't see
+        # wrangler's own .wrangler/ internal files and trigger reload loops.
+        mkdir -p /tmp/nova/src /tmp/nova/public
+        cp -a /app/index.html /tmp/nova/public/
+        cp -a /app/src/index.js /tmp/nova/src/
+        cp -a /app/wrangler.base44.jsonc /tmp/nova/
+        cp -a /app/package.json /tmp/nova/
+        cd /tmp/nova
+        npm install --no-audit --no-fund
+        # Background sync so edits in the bind mount reach the running copy
+        (while true; do
+          cp -u /app/index.html /tmp/nova/public/ 2>/dev/null || true
+          cp -u /app/src/index.js /tmp/nova/src/ 2>/dev/null || true
+          cp -u /app/wrangler.base44.jsonc /tmp/nova/ 2>/dev/null || true
+          sleep 2
+        done) &
+        # Use --local (AI binding "not supported") when no Cloudflare credentials
+        # are present; drop --local to let the AI binding connect remotely.
+        if [ -n "${CLOUDFLARE_API_TOKEN:-}" ]; then
+          exec npx wrangler dev --config wrangler.base44.jsonc --port 3000 --ip 0.0.0.0
+        else
+          exec npx wrangler dev --config wrangler.base44.jsonc --port 3000 --ip 0.0.0.0 --local
+        fi
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://localhost:3000/api/health').then(r=>r.ok?process.exit(0):process.exit(1)).catch(()=>process.exit(1))"]
+      interval: 15s
+      timeout: 5s
+      start_period: 40s
+      retries: 5
+    restart: on-failure

@@ -1,0 +1,17 @@
+{
+  "previewPort": 3000,
+  "healthPath": "/api/health",
+  "startCommand": "docker compose -f docker-compose.base44.yml up -d",
+  "secrets": [
+    {
+      "name": "CLOUDFLARE_ACCOUNT_ID",
+      "description": "Cloudflare account ID — needed for the Workers AI binding (the /api/generate endpoint). Find it in the Cloudflare dashboard under Workers & Pages. Without it the app still boots but AI generation returns 503.",
+      "requiredAtBoot": false
+    },
+    {
+      "name": "CLOUDFLARE_API_TOKEN",
+      "description": "Cloudflare API token with Workers AI permission — needed for the Workers AI binding (the /api/generate endpoint). Create one at Cloudflare dashboard > My Profile > API Tokens. Without it the app still boots but AI generation returns 503.",
+      "requiredAtBoot": false
+    }
+  ]
+}

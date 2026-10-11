@@ -1,0 +1,10 @@
+{
+  "name": "nova-ai",
+  "private": true,
+  "scripts": {
+    "dev": "wrangler dev --port 3000 --ip 0.0.0.0"
+  },
+  "devDependencies": {
+    "wrangler": "latest"
+  }
+}

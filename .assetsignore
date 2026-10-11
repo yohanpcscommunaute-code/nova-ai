@@ -1,0 +1,12 @@
+src/
+wrangler.jsonc
+node_modules/
+package.json
+package-lock.json
+.git/
+.gitignore
+.assetsignore.
+.assetsignore
+.base44/
+docker-compose.base44.yml
+README.md
